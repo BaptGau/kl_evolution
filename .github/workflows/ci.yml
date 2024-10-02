@@ -29,18 +29,11 @@ jobs:
           echo 'export PATH="$HOME/.local/bin:$PATH"' >> ~/.bashrc
           source ~/.bashrc
 
-      - name: Run Makefile test
+      - name: Run tests and ensrue coverage is above 85%
         run: |
-          poetry install
+          poetry install --quiet
           poetry run coverage run -m pytest -p no:warnings
           poetry run coverage report -m --fail-under=85
 
-      - name: Debug Information
-        run: |
-          python --version
-          poetry --version
-          pytest --version
-          echo $PATH
-      
       - name: Clean coverage files
         run: make clean-coverage
