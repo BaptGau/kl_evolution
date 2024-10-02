@@ -15,16 +15,13 @@ class KLResultsPlotter:
         kl_results: Serie,
         save_path: str | None = None,
         title: str | None = None,
-        xlabel: str | None = None,
         figsize: Tuple[int, int] = (15, 10),
     ) -> None:
 
         serie_label = serie.identifier if serie.identifier else "y"
         title = title if title else f"{serie_label}'s time evolution"
-        xlabel = xlabel if xlabel else "Time"
 
         mean_kl = kl_results.__avg__()
-
         fig, axes = plt.subplots(nrows=2, figsize=figsize)
 
         axes[0].plot(

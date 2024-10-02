@@ -21,6 +21,15 @@ class Serie:
                 "Seasonal period should be provided for deseasonalization."
             )
 
+        if self.detrend:
+            self.values = self.values - np.roll(a=self.values, shift=1)
+            self.values[0] = np.nan
+        if self.deseasonalize:
+            self.values = self.values - np.roll(
+                a=self.values, shift=self.seasonal_period
+            )
+            self.values[: self.seasonal_period] = np.nan
+
         if self.index is None:
             self.index = np.arange(len(self.values))
         else:

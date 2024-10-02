@@ -35,19 +35,21 @@ class ShiftedSerieAnalyzer:
         :param serie: The series to analyze.
         :return: The Kullback-Leibler divergences between the series and shifted versions of itself.
         """
-        if not self.__is_valid_serie(serie):
+        if not self.__is_valid_serie(serie=serie):
             raise ValueError("The values should be non-empty")
 
-        modified_serie = self.__is_modified(serie)
+        modified_serie = self.__is_modified(serie=serie)
         original_values = None
 
         if modified_serie:
-            original_values = self.__modify_serie_values(serie)
+            original_values = self.__modify_serie_values(serie=serie)
 
-        kl_divergences = self.__compute_kl_for_shifts(serie)
+        kl_divergences = self.__compute_kl_for_shifts(serie=serie)
 
         if self.normalized:
-            kl_divergences = self.__normalize_kl(serie, kl_divergences)
+            kl_divergences = self.__normalize_kl(
+                serie=serie, kl_divergences=kl_divergences
+            )
 
         if modified_serie:
             serie.values = original_values

@@ -1,5 +1,6 @@
 import pandas as pd
 from matplotlib import pyplot as plt
+import mplcyberpunk as mpl
 from statsmodels.tsa.statespace.sarimax import SARIMAX
 from kl_evolution.core.data_objects.serie import Serie
 from kl_evolution.core.results_formatting.evaluation import ForecastEvaluation
@@ -35,7 +36,9 @@ if __name__ == "__main__":
     )
 
     print(result)
-    pd.DataFrame.from_dict(
-        data=result, orient="index", columns=["Kullback Lieber Divergences"]
-    ).plot(kind="bar", title="Kullback Lieber Divergences")
-    plt.show()
+    plt.style.use("cyberpunk")
+    plt.figure(figsize=(12, 8))
+    bars = plt.bar(result.keys(), result.values())
+    plt.title("Kullback Lieber Divergences")
+    mpl.add_bar_gradient(bars=bars)
+    plt.savefig("result_plots/forecast_evaluation.jpg", bbox_inches="tight")

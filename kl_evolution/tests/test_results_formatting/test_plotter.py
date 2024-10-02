@@ -29,7 +29,6 @@ class TestKLResultsPlotter(unittest.TestCase):
             kl_results=self.kl_results,
             save_path=save_path,
             title="Test Title",
-            xlabel="Test X-axis",
             figsize=(12, 8),
         )
 
@@ -44,7 +43,6 @@ class TestKLResultsPlotter(unittest.TestCase):
             kl_results=self.kl_results,
             save_path=None,
             title=None,
-            xlabel=None,
             figsize=(12, 8),
         )
 

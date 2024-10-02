@@ -17,8 +17,8 @@ if __name__ == "__main__":
     serie = Serie(
         values=demand_df.loc[:, "Temperature"].values,
         index=demand_df.index,
-        detrend=False, # can make them vary to see the uncertainty decreasing
-        deseasonalize=False, # can make them vary to see the uncertainty decreasing
+        detrend=False,  # can make them vary to see the uncertainty changing
+        deseasonalize=False,  # can make them vary to see the uncertainty changing
         seasonal_period=seasonality,
         identifier="Temperature",
     )
@@ -26,4 +26,8 @@ if __name__ == "__main__":
     analyzer = ShiftedSerieAnalyzer(max_horizon=week_period, normalized=True)
     kl_evolution = analyzer.compute(serie=serie)
 
-    KLResultsPlotter.plot_kl_results(serie=serie, kl_results=kl_evolution)
+    KLResultsPlotter.plot_kl_results(
+        serie=serie,
+        kl_results=kl_evolution,
+        save_path="result_plots/kl_evolution_among_shifts.jpg",
+    )
